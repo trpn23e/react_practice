@@ -3,6 +3,10 @@ import FaPencil from 'react-icons/lib/fa/pencil'
 import FaTrash from 'react-icons/lib/fa/trash'
 import FaFloppyO from 'react-icons/lib/fa/floppy-o'
 
+import {
+  updateMemo
+} from './../../action/boardAction'
+
 class Note extends Component {
     constructor(props){
       super(props)
@@ -57,6 +61,19 @@ class Note extends Component {
       this.props.onChange(this._newText.value, this.props.index)
       this.setState({
         editing: false
+      })
+
+      let param = {
+        memoKey: Math.ceil(Math.random(),1),
+        seq: Math.ceil(Math.random(),1),
+        note: this._newText.value,
+        xPos: Math.ceil(Math.random(),1),
+        yPos: Math.ceil(Math.random(),1)
+      }
+      updateMemo(param).then(response => {
+        console.log('note updated : ' + JSON.stringify(response))
+      }).catch(err => {
+        alert(err)
       })
     }
     renderForm(){

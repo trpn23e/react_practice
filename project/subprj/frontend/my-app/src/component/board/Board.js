@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Note from './Note'
 import FaPlus from 'react-icons/lib/fa/plus'
 import './../../resources/css/board.css'
+import {Router,Route,withRouter} from 'react-router';
 
 class Board extends Component {
   constructor(props){
@@ -15,20 +16,24 @@ class Board extends Component {
     this.update = this.update.bind(this)
     this.remove = this.remove.bind(this)
     this.nextId = this.nextId.bind(this)
+    
+    // DTI.js에서 this.props.history의 state로 파라미터를 넘기면 이렇게 옴
+    console.log('board state (param) : ' + JSON.stringify(this.props.location.state))
   }
 
   componentDidMount() {
     var self = this
-    if(this.props.count) {
-      fetch(`https://baconipsum.com/api/?type=all-meat&sentences=${this.props.count}`)
-        .then(response => response.json())
-        .then(json => json[0]
-                            .split('. ')
-                            .forEach(sentence => self.add(sentence.substring(0, 25))))
-    }
+    // if(this.props.count) {
+    //   fetch(`https://baconipsum.com/api/?type=all-meat&sentences=${this.props.count}`)
+    //     .then(response => response.json())
+    //     .then(json => json[0]
+    //                         .split('. ')
+    //                         .forEach(sentence => self.add(sentence.substring(0, 25))))
+    // }
   }
 
   add(text){
+    console.log('add text : ' + text)
     this.setState(prevState => ({
       notes: [
         ...prevState.notes,
@@ -77,7 +82,7 @@ class Board extends Component {
      return (
         <div className="board">
           {this.state.notes.map(this.eachNote)}
-          <button onClick={this.add.bind(null, "New Note")}
+          <button onClick={this.add.bind(null, "새 메모")}
                   id="add">
                   <FaPlus />
           </button>
@@ -86,4 +91,4 @@ class Board extends Component {
   }
 }
 
-export default Board
+export default withRouter(Board)

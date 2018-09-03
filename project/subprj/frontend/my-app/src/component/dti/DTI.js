@@ -90,6 +90,7 @@ import { loadProgressBar } from 'axios-progress-bar'
 import 'axios-progress-bar/dist/nprogress.css'
 import JSONPretty from 'react-json-pretty'
 import {Router,Route,withRouter} from 'react-router';
+import { Link } from 'react-router-dom'
 
 class DTI extends Component {
   constructor (props, context) {
@@ -189,12 +190,32 @@ class DTI extends Component {
     })
   }
   
+  // _goBoard = (ev) => {
+  //   ev.nativeEvent.stopImmediatePropagation();
+  //   this._initState()
+  //   // this.props.history.push('/board');
+  //   this.props.history.push({
+  //     pathname: '/board',
+  //     search: '?page=1',
+  //     state: null
+  //   })
+  // }
+
   _goBoard = (ev) => {
     ev.nativeEvent.stopImmediatePropagation();
     this._initState()
-    this.props.history.push('/board');
+    // this.props.history.push('/board');
+    this.props.history.push({
+      pathname: '/board',
+      // search: '?page=1',
+      state: {
+        params : {
+          page: 1
+        }
+      }
+    })
   }
-
+  
   _getListToTestDtiJMS = (ev) => {
     ev.nativeEvent.stopImmediatePropagation();
     this._initState()
@@ -310,7 +331,7 @@ class DTI extends Component {
               <Button type="primary" onClick={this._getQueryDslList}>Query DSL</Button>
               <Button type="primary" onClick={this._getJpaList} style={styles.btnLeftPad}>JPA</Button>
               <Button type="primary" onClick={this._getMybatisList} style={styles.btnLeftPad}>Mybatis</Button>
-              <Button type="primary" onClick={this._goBoard}>Board?</Button>
+              <Button type="primary" onClick={this._goBoard}>Board</Button>
             </div>
             <div style={styles.divDefault}>
               <Fragment>JMS 호출 테스트(Ountbound(Adaptor - Router - Connector) : </Fragment>

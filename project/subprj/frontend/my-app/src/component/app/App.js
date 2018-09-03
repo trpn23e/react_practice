@@ -2,6 +2,7 @@ import React, {
   Component
   // Fragment
 } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RouterCmp from './../router/RouterCmp'
 
 class App extends Component {
@@ -39,7 +40,7 @@ class App extends Component {
   render () {
     return (
       <div>
-        <RouterCmp cmpName="DTI" />
+        <RouterCmp />
       </div>
     )
   }

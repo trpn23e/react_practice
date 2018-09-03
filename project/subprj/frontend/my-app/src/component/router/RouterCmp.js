@@ -3,7 +3,6 @@ import React, {
   Fragment
 } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { withRouter } from 'react-router';
 
 // import Common from './../common/Common'
 import DTI from './../dti/DTI'
@@ -14,13 +13,22 @@ class RouterCmp extends Component {
     super(props, context);
   }
 
+  // componentDidMount () {
+  //   const { handle } = this.props.match.params
+  //   fetch(`https://localhost:3000/${handle}`)
+  //     .then((user) => {
+  //       this.setState(() => ({ user }))
+  //     })
+  // }
+  
   _routingPaths () {
     return (
       <Router>
         <Switch>
           {/* <Common commonProp={this.state} /> */}
-          <Route exact path='/' component={DTI} />
-          <Route path='/board' component={Board} />
+          {/* <Route exact path='/' render={ (props) => <DTI {...props} cpmName='DTI' /> } /> */}
+          <Route exact path='/' render={ (props) => <DTI {...props} cpmName='DTI' /> } />
+          <Route path='/board' render={ (props) => <Board {...props} cpmName='BOARD' /> } />
           {/* <DTI cpmName="DTI" /> */}
         </Switch>
       </Router>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.pis.mapper.MemoMapper">
+
+    <select id="existMemoCnt" parameterType="java.util.HashMap" resultType="int">
+      SELECT COUNT(1)
+      FROM MEMO_TBL
+      WHERE MEMO_KEY = #{memoKey};
+    </select>
+
+    <update id="updateMemo" parameterType="java.util.HashMap">
+      UPDATE MEMO_TBL
+      SET
+      NOTE = #{note},
+      XPOS = #{xPos},
+      YPOS = #{yPos},
+      CREATE_DT = NULL,
+      UPDATE_DT = NULL;
+    </update>
+
+    <insert id="insertMemo" parameterType="java.util.HashMap">
+      INSERT INTO MEMO_TBL VALUES (
+        #{memoKey},
+        #{seq},
+        #{note},
+        #{xPos},
+        #{yPos},
+        NULL,
+        NULL
+      )
+    </insert>
+
+</mapper>
