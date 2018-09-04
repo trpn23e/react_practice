@@ -98,10 +98,23 @@ class DTI extends Component {
     this.state = {
       viewList: null,
       viewData: null,
-      inputValue: ''
+      inputValue: '',
+      users: []
     }
     loadProgressBar()
   };
+
+  // Node Express Connect Test
+  componentDidMount() {
+    fetch('http://127.0.0.1:5000/users')
+    // fetch('/users')
+    .then(res => res.json())
+    .then(users => this.setState({ users }));
+    // // .then(res => res.json())
+    // // .then(res => this._setViewData(res))
+    // // .then(res => console.log('Express Server Response : ' + JSON.stringify(res)))
+    // //.then(users => this.setState({ users }));
+  }
 
   _initState () {
     this.setState({
@@ -309,6 +322,13 @@ class DTI extends Component {
           <img src={require('./../../resources/img/2037.jpg')} style={{width:30,height:30,paddingBottom:5}} />
           <Card className="box-card" style={{marginBottom:20}}>
             <div style={styles.divDefault}>
+            <span>Node Express Server Connect Test : 
+              {
+                this.state.users.map(user =>
+                  <div key={user.id}>{user.username}</div>
+                )
+              }
+              </span><br></br>
               <span>
                 Component Name : {this.props.cpmName}
               </span>
