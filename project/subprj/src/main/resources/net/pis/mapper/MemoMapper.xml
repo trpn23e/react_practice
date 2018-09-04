@@ -20,6 +20,7 @@
       YPOS = #{yPos},
       CREATE_DT = NULL,
       UPDATE_DT = NULL;
+      WHERE MEMO_KEY = #{memoKey}
     </update>
 
     <insert id="insertMemo" parameterType="java.util.HashMap">

@@ -28,7 +28,7 @@ class RouterCmp extends Component {
           {/* <Common commonProp={this.state} /> */}
           {/* <Route exact path='/' render={ (props) => <DTI {...props} cpmName='DTI' /> } /> */}
           <Route exact path='/' render={ (props) => <DTI {...props} cpmName='DTI' /> } />
-          <Route path='/board' render={ (props) => <Board {...props} cpmName='BOARD' /> } />
+          <Route exact path='/board' render={ (props) => <Board {...props} cpmName='BOARD' /> } />
           {/* <DTI cpmName="DTI" /> */}
         </Switch>
       </Router>

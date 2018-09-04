@@ -194,6 +194,7 @@ module.exports = {
       // contentBase: './build',
       contentBase: resolve('build'),
       compress: false,
+      historyApiFallback: true,
       hot : true,
       inline: true,
       port: 3000,

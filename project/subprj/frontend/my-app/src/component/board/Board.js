@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 
 import Note from './Note'
 import FaPlus from 'react-icons/lib/fa/plus'
-import './../../resources/css/board.css'
 import {Router,Route,withRouter} from 'react-router';
+// import './../../resources/css/board.css'
 
-class Board extends Component {
+class Board extends Component {  
   constructor(props){
     super(props)
     this.state = {
@@ -38,6 +38,7 @@ class Board extends Component {
       notes: [
         ...prevState.notes,
         {
+          key: this.nextId(),
           id: this.nextId(),
           note: text
         }
@@ -52,7 +53,8 @@ class Board extends Component {
   }
 
   update(newText, i){
-    console.log("updating item at index", i, newText)
+    // console.log("updating item at index", i, newText)
+    console.log('updating item at index :::: ' + i + ' txt : ' + newText)
     this.setState(prevState => ({
       notes: prevState.notes.map(
         note => (note.id !==i) ? note : {...note, note: newText}
@@ -68,6 +70,8 @@ class Board extends Component {
   }
 
   eachNote(note, i){
+    console.log('eachnote note : ' + JSON.stringify(note))
+    console.log('eachnote idx : ' + i)
     return (
       <Note key={note.id}
             index={note.id}

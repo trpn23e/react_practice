@@ -5,6 +5,9 @@ import React, {
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RouterCmp from './../router/RouterCmp'
 
+// import DTI from './../dti/DTI'
+// import Board from './../board/Board'
+
 class App extends Component {
   constructor(props, context) {
     super(props, context)
@@ -41,6 +44,7 @@ class App extends Component {
     return (
       <div>
         <RouterCmp />
+        {/* <DTI cpmName="DTI" /> */}
       </div>
     )
   }

@@ -23,6 +23,7 @@ const devConfiguration = {
     compress: false,
     hot : true,
     inline: true,
+    historyApiFallback: true,
     port: 3000,
     open : true
   }

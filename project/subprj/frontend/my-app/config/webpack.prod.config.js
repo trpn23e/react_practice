@@ -24,3 +24,4 @@ const prodConfiguration = {
 // module.exports = merge.smart(baseConfig, prodConfiguration, optimizationConfig)
 // module.exports = Object.assign(baseConfig, optimizationConfig, prodConfiguration)
 module.exports = merge.smart(baseConfig, optimizationConfig, prodConfiguration)
+// module.exports = merge.smart(baseConfig, prodConfiguration)

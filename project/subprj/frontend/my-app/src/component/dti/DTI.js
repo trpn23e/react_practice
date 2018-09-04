@@ -375,3 +375,4 @@ class DTI extends Component {
 }
 
 export default withRouter(DTI);
+// export default DTI;

@@ -63,15 +63,16 @@ class Note extends Component {
         editing: false
       })
 
+      console.log('11111111111 : ' + JSON.stringify(this.props))
       let param = {
-        memoKey: Math.ceil(Math.random(),1),
-        seq: Math.ceil(Math.random(),1),
+        memoKey: this.props.key,
+        seq: this.props.index,
         note: this._newText.value,
         xPos: Math.ceil(Math.random(),1),
         yPos: Math.ceil(Math.random(),1)
       }
       updateMemo(param).then(response => {
-        console.log('note updated : ' + JSON.stringify(response))
+        console.log('note updated : ' + JSON.stringify(response.data))
       }).catch(err => {
         alert(err)
       })
