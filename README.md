@@ -6,6 +6,6 @@ JMS Apache Active MQ, JPA, QueryDSL, React, Element UI
 
 •Make root directory's name would be 'home' or possible to change anything you want but recommend to check realted configurations and settings
 
-※ This repository BackEnd, FrontEnd settings are similar to 'project_template' repository's setting
-   this repository is can be deleted if I think enough to learn to make react application
+※ This repository's BackEnd, FrontEnd settings are similar to 'project_template' repository's setting
+   it can be deleted if I think enough to learn to make professional react application
    if learning result is acceptable I would apply result to 'project_template' repository
