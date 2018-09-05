@@ -10,16 +10,16 @@ JMS Apache Active MQ, JPA, QueryDSL, React, Element UI
    it can be deleted if I think enough to learn to make professional react application
    if learning result is acceptable I would apply result to 'project_template' repository
 
-   ================================================================================================================
-   설치방법  
+    설치방법
+      
    
     1.아무 드라이브에 MYPROJ.zip을 그대로 압축해제, IntelliJ로 디렉토리 오픈
     
     2.Run/Debug Configuration에서 Gradle 추가 
     (
-        &nbsp;&nbsp;Gradle project : home:project:subprj<br>
-        &nbsp;&nbsp;Tasks : bootRun<br>
-        &nbsp;&nbsp;Script parameters : --stacktrace <-- 해도되고 안해도됨
+        Gradle project : home:project:subprj<br>
+        Tasks : bootRun<br>
+        Script parameters : --stacktrace <-- 해도되고 안해도됨
     )
     
      BackEnd 접속 URL : http://localhost:50000
