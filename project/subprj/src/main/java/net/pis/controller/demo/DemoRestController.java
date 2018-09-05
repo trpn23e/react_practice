@@ -40,6 +40,14 @@ public class DemoRestController {
     @Autowired
     private JmsSender jmsSender;
 
+    // React -> Node Express FrontEnd Server -> Spring  Request Test
+    @RequestMapping(value = "/rest/reqThruExpress",  method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseEntity reqThruExpress(HttpServletRequest req, @RequestBody Map<String, Object> paramMap) {
+        HashMap<String, Object> result = new HashMap<String, Object>();
+        result.put("result", "success");
+        return JSONResponse.getJSONResponse(req,result);
+    }
+
     // Query DSL
     @RequestMapping(value = "/restdemo1", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity restDemo1(HttpServletRequest req, @RequestBody Map<String, Object> paramMap) {

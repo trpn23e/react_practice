@@ -44,6 +44,7 @@
     "eject": "react-scripts eject",
     "transpile": "babel src -d dist --copy-files"
   },
+  "proxy": "http://localhost:5000",
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.0.0-rc.3",
     "babel-cli": "^6.26.0",

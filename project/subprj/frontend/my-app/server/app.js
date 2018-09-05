@@ -6,11 +6,12 @@ var logger = require('morgan');
 var cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var posts = require('./routes/posts');
+var connTestRouter = require('./routes/connection');
+var restService = require('./routes/rest');
 
 var app = express();
 
+// add cors with middleware
 app.use(cors());
 
 // view engine setup
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//CORS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -30,8 +32,8 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/posts', posts);
+app.use('/connection', connTestRouter);
+app.use('/rest', restService);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

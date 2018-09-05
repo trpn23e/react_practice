@@ -15,6 +15,7 @@ import {
 // import Paper from '@material-ui/core/Paper'
 // import Grid from '@material-ui/core/Grid'
 // import PropTypes from 'prop-types'
+import axios from 'axios'
 import {
   Pagination,
   Dialog,
@@ -99,21 +100,63 @@ class DTI extends Component {
       viewList: null,
       viewData: null,
       inputValue: '',
-      users: []
+      frontEndSrvConnStatus: null
     }
     loadProgressBar()
   };
 
   // Node Express Connect Test
+  // componentDidMount() {
+  // componentWillMount () {
   componentDidMount() {
-    fetch('http://127.0.0.1:5000/users')
+    // fetch는 뭘해도 proxy가 잘 안되서 axios로 변경했지만
+    // 아직 이유를 잘 모르겠다. request나 response header정보가 
+    // text/html로 가서 그런것 같긴한데 확실하지가 않음
     // fetch('/users')
-    .then(res => res.json())
-    .then(users => this.setState({ users }));
-    // // .then(res => res.json())
-    // // .then(res => this._setViewData(res))
-    // // .then(res => console.log('Express Server Response : ' + JSON.stringify(res)))
-    // //.then(users => this.setState({ users }));
+    let axiosReqParam = {
+      method: 'get',
+      url: '/connection',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      }
+    }
+    axios(axiosReqParam).then(response => {
+      console.log('Express Connection Response : ' + JSON.stringify(response))
+      if (response.data !== undefined) {
+        this.setState({ frontEndSrvConnStatus: response.data })
+      } else {
+        console.log('undefined response data!')
+      }
+    }).catch(err => {
+      console.log('Node Express Connection Error : ' + err)
+    })
+  }
+
+  _reqThruExpressTest () {
+    let jsonParam = {
+      testParamA: 1,
+      testParamB: 2
+    }
+    // axios 요청시 키가 data면 json, params면 일반 get요청을 보낸다
+    let axiosReqParam = {
+      data: jsonParam,
+      method: 'get', // Express에서는 get밖에 못받고 있는데.. post는 어찌안되나 찾아보자
+      url: '/rest/reqThruExpress',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      }
+    }
+    let that = this
+    axios(axiosReqParam).then(response => {
+      console.log('Express reqThruExpress Response : ' + JSON.stringify(response))
+      if (response.data !== undefined) {
+        // this.setState({ viewData: response.data })
+      } else {
+        console.log('undefined response data!')
+      }
+    }).catch(err => {
+      console.log('Node Express Connection Error : ' + err)
+    })
   }
 
   _initState () {
@@ -322,13 +365,28 @@ class DTI extends Component {
           <img src={require('./../../resources/img/2037.jpg')} style={{width:30,height:30,paddingBottom:5}} />
           <Card className="box-card" style={{marginBottom:20}}>
             <div style={styles.divDefault}>
-            <span>Node Express Server Connect Test : 
-              {
-                this.state.users.map(user =>
-                  <div key={user.id}>{user.username}</div>
-                )
-              }
-              </span><br></br>
+            <span>Node Express MiddleWare Connection Status : 
+                <div>
+                  <span>
+                    ServerIP : &nbsp;
+                  { (
+                      this.state.frontEndSrvConnStatus !== undefined &&
+                      this.state.frontEndSrvConnStatus != null
+                    ) ?
+                    this.state.frontEndSrvConnStatus.serverIP : '-'
+                  }
+                  &nbsp;&nbsp;
+                  </span>
+                  <span>
+                    Server Port : &nbsp;
+                  { (
+                      this.state.frontEndSrvConnStatus !== undefined &&
+                      this.state.frontEndSrvConnStatus != null 
+                    ) ? this.state.frontEndSrvConnStatus.serverPort : '-'
+                  }
+                  </span>
+                </div>
+              </span>
               <span>
                 Component Name : {this.props.cpmName}
               </span>
@@ -346,6 +404,7 @@ class DTI extends Component {
               </span>
             </div>
             <div style={styles.divDefault}>
+              <Button type="primary" onClick={this._reqThruExpressTest}>Req React >> Express >> BackEnd Srv</Button><br></br><br></br>
               <Button type="primary" onClick={this._goBackEndIndex}>BackEnd 서버 페이지 이동</Button>
               <Button type="primary" onClick={this._goH2DbConsole}>H2 DB Console 이동(BackEnd)</Button>
               <Button type="primary" onClick={this._getQueryDslList}>Query DSL</Button>
