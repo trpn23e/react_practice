@@ -102,7 +102,11 @@ class DTI extends Component {
       inputValue: '',
       frontEndSrvConnStatus: null
     }
+
     loadProgressBar()
+
+    // 비동기 요청등을 사용하는 경우 react의 this를 잃어버리기 때문에 미리 바인딩을 해준다
+    this._reqThruExpressTest = this._reqThruExpressTest.bind(this)
   };
 
   // Node Express Connect Test
@@ -134,23 +138,24 @@ class DTI extends Component {
 
   _reqThruExpressTest () {
     let jsonParam = {
-      testParamA: 1,
-      testParamB: 2
+      testParam: this.state.inputValue
     }
     // axios 요청시 키가 data면 json, params면 일반 get요청을 보낸다
     let axiosReqParam = {
-      data: jsonParam,
+      // data: jsonParam,
+      params: jsonParam, // 우선은 express에서 router.get할때의 req가 querystring으로 밖에 전달이 안됨, 다른방법이 없는지는 찾아봐야됨
       method: 'get', // Express에서는 get밖에 못받고 있는데.. post는 어찌안되나 찾아보자
       url: '/rest/reqThruExpress',
       headers: {
-        'Content-Type': 'application/json;charset=utf-8'
+        // 'Content-Type': 'application/json;charset=utf-8'
+        'Content-Type': 'application/x-www-form-urlencoded'
       }
     }
-    let that = this
-    axios(axiosReqParam).then(response => {
+
+    axios(axiosReqParam).then((response) => {
       console.log('Express reqThruExpress Response : ' + JSON.stringify(response))
       if (response.data !== undefined) {
-        // this.setState({ viewData: response.data })
+        this.setState({viewData: response.data})
       } else {
         console.log('undefined response data!')
       }
@@ -404,13 +409,15 @@ class DTI extends Component {
               </span>
             </div>
             <div style={styles.divDefault}>
-              <Button type="primary" onClick={this._reqThruExpressTest}>Req React >> Express >> BackEnd Srv</Button><br></br><br></br>
+              <span> ⊙ Node JS Express 경유</span><br></br><br></br>
+              <Button type="primary" onClick={this._reqThruExpressTest}>React >> Express >> BackEnd 서버요청</Button><br></br><br></br>
+              <span> ⊙ Only React</span><br></br><br></br>
               <Button type="primary" onClick={this._goBackEndIndex}>BackEnd 서버 페이지 이동</Button>
               <Button type="primary" onClick={this._goH2DbConsole}>H2 DB Console 이동(BackEnd)</Button>
               <Button type="primary" onClick={this._getQueryDslList}>Query DSL</Button>
               <Button type="primary" onClick={this._getJpaList} style={styles.btnLeftPad}>JPA</Button>
               <Button type="primary" onClick={this._getMybatisList} style={styles.btnLeftPad}>Mybatis</Button>
-              <Button type="primary" onClick={this._goBoard}>Board</Button>
+              <Button type="primary" onClick={this._goBoard}>Board (React Router Test)</Button>
             </div>
             <div style={styles.divDefault}>
               <Fragment>JMS 호출 테스트(Ountbound(Adaptor - Router - Connector) : </Fragment>

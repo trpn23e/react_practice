@@ -43,6 +43,10 @@ public class DemoRestController {
     // React -> Node Express FrontEnd Server -> Spring  Request Test
     @RequestMapping(value = "/rest/reqThruExpress",  method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity reqThruExpress(HttpServletRequest req, @RequestBody Map<String, Object> paramMap) {
+        log.info("==== reqThruExpress ====");
+        if (paramMap != null) {
+            log.info("paramMap : " + paramMap.toString());
+        }
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", "success");
         return JSONResponse.getJSONResponse(req,result);
