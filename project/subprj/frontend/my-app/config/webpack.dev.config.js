@@ -30,7 +30,15 @@ const devConfiguration = {
     proxy: {
       '**': {
         target: 'http://localhost:5000',
-        secure: false
+        secure: false,
+        bypass: function(req, res, proxyOptions) {
+          if (req.headers.accept.indexOf('html') !== -1) {
+            // 페이지 refresh (ex)f5등을 눌러서 실제적인 refresh가 발생할경우
+            // proxy요청을 피하도록 한다
+            console.log('Skipping proxy for browser request.');
+            return '/index.html';
+          }
+        }
       }
     }
   }
