@@ -39,8 +39,8 @@
   "scripts": {
     "dev": "webpack-dev-server --hot --mode=development --progress --inline --debug --config ./config/webpack.dev.config.js",
     "build": "webpack -p --mode=production --progress --config ./config/webpack.prod.config.js",
-    "start": "react-scripts start",
-    "test": "react-scripts test --env=jsdom",
+    "start": "set PORT=3030 && react-scripts start",
+    "test": "set PORT=3030 && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "transpile": "babel src -d dist --copy-files"
   },

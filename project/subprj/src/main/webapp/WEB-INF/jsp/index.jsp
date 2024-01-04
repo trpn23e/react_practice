@@ -62,7 +62,7 @@
  }
 
  function goFrontEnd () {
-     window.open("http://localhost:3000", "_blank");
+     window.open("http://localhost:3030", "_blank");
  }
 
  function getListByQueryDSL() {

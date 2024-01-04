@@ -24,9 +24,9 @@ const devConfiguration = {
     hot : true,
     inline: true,
     historyApiFallback: true,
-    port: 3000,
+    port: 3030,
     open : true,
-    // 기본은 3000 포트로 요청이 들어오지만 proxy를 통해 5000 포트로 요청을 전달한다
+    // 기본은 3030 포트로 요청이 들어오지만 proxy를 통해 5000 포트로 요청을 전달한다
     proxy: {
       '**': {
         target: 'http://localhost:5000',

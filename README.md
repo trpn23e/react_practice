@@ -23,7 +23,7 @@ JMS Apache Active MQ, JPA, QueryDSL, React, Element UI
     )
     
      BackEnd 접속 URL : http://localhost:50000
-     FrontEnd 접속 URL(React) : http://localhost:3000
+     FrontEnd 접속 URL(React) : http://localhost:3030
      FrontEnd Server(Node JS Express) 접속 URL : http://localhost:5000
      
     
@@ -35,7 +35,7 @@ JMS Apache Active MQ, JPA, QueryDSL, React, Element UI
         예를 보기 위함이다. FrontEnd(React)에서 npm run dev시 webpack devserver에 설정된
         proxy를 타고 FrontEnd Server(Node JS Express)로 접근하게 된다.
         Front, BackEnd 측 서버를 모두 구동 후
-        http://localhost:3000으로 접속해서 'React>>Express>>BackEnd 서버요청' 버튼을 눌러보면
+        http://localhost:3030으로 접속해서 'React>>Express>>BackEnd 서버요청' 버튼을 눌러보면
         React UI에서 Express -> Spring BackEnd쪽으로 로직이 흘러감을 볼 수 있다.
      
      ※ FrontEnd의 경우 각각(React, Express)의 package.json등의 내용이 다르므로 혼동하지 말것!
